@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - SkillSwap Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --main-bg: linear-gradient(to right, #b0caf2, #5a7ed9);
+      --primary-color: #091772;
+      --accent-color: #42a5f5;
+      --hover-accent: #ffc311;
+      --text-color: #030508;
+      --muted-text: #6c757d;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-header-bg: #bbdefb;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--main-bg);
+      color: var(--text-color);
+      padding-top: 70px;
+    }
+    .navbar {
+      background-color: var(--primary-color);
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      color: var(--hover-accent) !important;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: none;
+      backdrop-filter: blur(6px);
+      border-radius: 0.75rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .card-header {
+      background-color: var(--card-header-bg);
+      color: #0d1b2a;
+      font-weight: bold;
+      border-radius: 0.75rem 0.75rem 0 0;
+      font-size: 1.2rem;
+    }
+    .btn-download {
+      background-color: var(--hover-accent);
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 0.85rem 3rem;
+      border-radius: 30px;
+      border: none;
+      box-shadow: 0 5px 15px rgba(255, 195, 17, 0.7);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-download:hover {
+      background-color: #e6b800;
+      color: #000;
+      box-shadow: 0 8px 20px rgba(255, 195, 17, 0.9);
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    ul li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      color: var(--primary-color);
+    }
+    ul li button {
+      min-width: 75px;
+      font-size: 0.85rem;
+    }
+    input.form-control,
+    textarea.form-control {
+      border-radius: 0.5rem;
+      border: 1.5px solid var(--hover-accent);
+      font-size: 1rem;
+      color: var(--primary-color);
+      transition: border-color 0.3s ease;
+    }
+    input.form-control:focus,
+    textarea.form-control:focus {
+      border-color: #e6b800;
+      box-shadow: 0 0 6px #e6b800;
+      outline: none;
+    }
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    .footer-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .footer-section h5 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-section ul li a {
+      color: #f1f1f1;
+      text-decoration: none;
+    }
+    .footer-section ul li a:hover {
+      text-decoration: underline;
+      color: var(--hover-accent);
+    }
+    .footer-section p {
+      margin: 0.2rem 0;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    /* Notification Bell */
+    .nav-item.notifications {
+      position: relative;
+      cursor: pointer;
+    }
+    .notification-bell {
+      font-size: 1.5rem;
+      color: #fff;
+      position: relative;
+      user-select: none;
+    }
+    .notification-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--hover-accent);
+      color: var(--primary-color);
+      font-weight: 700;
+      border-radius: 50%;
+      padding: 2px 7px;
+      font-size: 0.75rem;
+      box-shadow: 0 0 3px #e6b800;
+    }
+    .notifications-dropdown {
+      position: absolute;
+      top: 2rem;
+      right: 0;
+      width: 280px;
+      background: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 1rem;
+      z-index: 1050;
+      display: none;
+    }
+    .notifications-dropdown.show {
+      display: block;
+    }
+    .notifications-dropdown h6 {
+      margin-top: 0;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+    }
+    .notifications-dropdown ul {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .notifications-dropdown ul li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      color: var(--primary-color);
+    }
+    .notifications-dropdown ul li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="dashboard.html">SkillSwap Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+          <li class="nav-item"><a class="nav-link" href="swap.html">Swaps</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+          <!-- Notification bell -->
+          <li class="nav-item notifications" id="notificationBell" tabindex="0" aria-label="Notifications">
+            <span class="notification-bell">&#128276;</span>
+            <span class="notification-badge" id="notificationCount">0</span>
+            <div class="notifications-dropdown" id="notificationsDropdown" aria-live="polite" aria-atomic="true">
+              <h6>New User Logins</h6>
+              <ul id="notificationsList">
+                <!-- New user notifications go here -->
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard content -->
+  <div class="container py-5">
+    <h2 class="text-center fw-bold mb-5">Admin Dashboard</h2>
+
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-header">Total Users</div>
+          <div class="card-body">
+            <h3 id="totalUsers">1,245</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-header">Active Swaps</div>
+          <div class="card-body">
+            <h3 id="activeSwaps">328</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-header">Reports Received</div>
+          <div class="card-body">
+            <h3 id="reportsReceived">18</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moderation Actions -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Pending Skill Descriptions</div>
+          <div class="card-body">
+            <ul>
+              <li>User123 - "Hacking Social Media"
+                <div>
+                  <button class="btn btn-sm btn-danger me-2">Reject</button>
+                  <button class="btn btn-sm btn-success">Approve</button>
+                </div>
+              </li>
+              <li>User456 - "Photoshop Pro"
+                <div>
+                  <button class="btn btn-sm btn-danger me-2">Reject</button>
+                  <button class="btn btn-sm btn-success">Approve</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Ban Users</div>
+          <div class="card-body">
+            <input type="text" class="form-control mb-2" placeholder="Enter Username or Email" />
+            <button class="btn btn-danger w-100">Ban User</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform Notifications -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">Send Announcement</div>
+          <div class="card-body">
+            <textarea class="form-control mb-2" placeholder="Platform update, downtime, etc." rows="4"></textarea>
+            <button class="btn btn-primary w-100">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Logs -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">Feedback Logs</div>
+          <div class="card-body" id="feedbackLogs">
+            <ul>
+              <li>"Great experience swapping Python for UI/UX!"</li>
+              <li>"User XYZ ghosted after accepting swap request."</li>
+              <li>"Need better filter options for skill discovery."</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Reports -->
+    <div class="row mb-4 text-center">
+      <div class="col-12">
+        <button class="btn-download">Download All Reports</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-flex">
+      <div class="footer-section">
+        <h5>About Us</h5>
+        <p>
+          SkillSwap connects learners worldwide to share and exchange skills, fostering a community of
+          collaborative growth and continuous learning. Our platform empowers users to build meaningful
+          connections, grow their expertise, and unlock new opportunities by exchanging talents.
+          We are committed to inclusivity, innovation, and helping everyone reach their fullest potential.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h5>Follow Us</h5>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h5>Contact</h5>
+        <p>Email: support@skillswap.com</p>
+        <p>Phone: +1-234-567-8901</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 SkillSwap. All rights reserved.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Report download (same as before)
+    document.querySelector('.btn-download').addEventListener('click', () => {
+      const totalUsers = document.getElementById('totalUsers').innerText;
+      const activeSwaps = document.getElementById('activeSwaps').innerText;
+      const reportsReceived = document.getElementById('reportsReceived').innerText;
+
+      const feedbackItems = document.querySelectorAll('#feedbackLogs ul li');
+      const feedbackList = Array.from(feedbackItems).map(li => li.innerText);
+
+      let reportText = 'SkillSwap Admin Report\n';
+      reportText += '=====================\n\n';
+      reportText += `Total Users: ${totalUsers}\n`;
+      reportText += `Active Swaps: ${activeSwaps}\n`;
+      reportText += `Reports Received: ${reportsReceived}\n\n`;
+      reportText += 'Feedback Logs:\n';
+      feedbackList.forEach((fb, i) => {
+        reportText += `${i + 1}. ${fb}\n`;
+      });
+
+      const blob = new Blob([reportText], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'SkillSwap_Admin_Report.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Notification bell toggle
+    const notificationBell = document.getElementById('notificationBell');
+    const notificationsDropdown = document.getElementById('notificationsDropdown');
+    const notificationsList = document.getElementById('notificationsList');
+    const notificationCount = document.getElementById('notificationCount');
+
+    notificationBell.addEventListener('click', () => {
+      notificationsDropdown.classList.toggle('show');
+    });
+
+    // Simulate new user logins every 10 seconds
+    const newUsers = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace'];
+    let notifications = [];
+
+    function addNewUserNotification() {
+      const user = newUsers[Math.floor(Math.random() * newUsers.length)];
+      const now = new Date();
+      const time = now.toLocaleTimeString();
+      const notificationText = `${user} logged in at ${time}`;
+
+      notifications.unshift(notificationText); // newest at top
+      if (notifications.length > 5) notifications.pop(); // keep max 5
+
+      renderNotifications();
+    }
+
+    function renderNotifications() {
+      notificationsList.innerHTML = '';
+      notifications.forEach(note => {
+        const li = document.createElement('li');
+        li.textContent = note;
+        notificationsList.appendChild(li);
+      });
+      notificationCount.textContent = notifications.length;
+      notificationCount.style.display = notifications.length ? 'inline-block' : 'none';
+    }
+
+    // Initialize with no notifications badge hidden
+    notificationCount.style.display = 'none';
+
+    // Start simulation
+    setInterval(addNewUserNotification, 10000);
+
+    // Close notifications if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!notificationBell.contains(e.target)) {
+        notificationsDropdown.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

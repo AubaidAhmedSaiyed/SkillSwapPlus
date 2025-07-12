@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - User Feedback | SkillSwap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary-blue: #091772;
+      --accent-color: #ffc311;
+      --muted-text: #666;
+    }
+
+    body {
+      background: linear-gradient(to right, #b0caf2, #5a7ed9);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: var(--primary-blue);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-color) !important;
+    }
+
+    .admin-header {
+      background-color: white;
+      padding: 2rem 1rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .feedback-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .feedback-meta {
+      font-size: 0.9rem;
+      color: var(--muted-text);
+    }
+
+    .badge-positive { background-color: #198754; }
+    .badge-negative { background-color: #dc3545; }
+    .badge-neutral { background-color: #6c757d; }
+
+    .action-buttons button {
+      margin-right: 0.5rem;
+    }
+
+    .footer {
+      background: rgba(9, 23, 114, 0.95);
+      color: #f8f9fa;
+      padding: 3rem 1rem 1rem;
+      font-size: 0.95rem;
+      border-top: 4px solid #070f5a;
+      backdrop-filter: blur(6px);
+    }
+
+    .footer-section {
+      margin-bottom: 1.5rem;
+      flex: 1 1 220px;
+    }
+
+    .footer-section h5 {
+      font-size: 1.1rem;
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section a {
+      color: #e0e0e0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    .footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+
+    .footer .text-center {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 1rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="#">SkillSwap Admin</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+        <li class="nav-item"><a class="nav-link" href="swap.html">Swaps</a></li>
+        <li class="nav-item"><a class="nav-link active" href="feedback.html">Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<div class="container">
+  <div class="admin-header">
+    <h2 class="fw-bold">User Feedback</h2>
+    <p class="text-muted">View and moderate feedback left by users on skill exchanges.</p>
+  </div>
+
+  <!-- Feedback Cards -->
+  <div class="feedback-card">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h5 class="fw-bold mb-1">Jane Doe</h5>
+        <p class="mb-0"><strong>Feedback on:</strong> Swap #SWP101</p>
+      </div>
+      <span class="badge badge-positive p-2">Positive</span>
+    </div>
+    <p class="mt-3">"I loved the session! The Excel techniques were clearly explained, and I learned so much from John. Highly recommend this platform!"</p>
+    <div class="feedback-meta">
+      <p>Submitted on: 03 July 2025</p>
+    </div>
+    <div class="action-buttons mt-2">
+      <button class="btn btn-danger btn-sm">Delete</button>
+      <button class="btn btn-secondary btn-sm">Flag</button>
+    </div>
+  </div>
+
+  <div class="feedback-card">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h5 class="fw-bold mb-1">Ravi Kumar</h5>
+        <p class="mb-0"><strong>Feedback on:</strong> Swap #SWP103</p>
+      </div>
+      <span class="badge badge-negative p-2">Negative</span>
+    </div>
+    <p class="mt-3">"The swap started well but communication broke down midway. My partner didn’t show up after the first session."</p>
+    <div class="feedback-meta">
+      <p>Submitted on: 07 July 2025</p>
+    </div>
+    <div class="action-buttons mt-2">
+      <button class="btn btn-danger btn-sm">Delete</button>
+      <button class="btn btn-warning btn-sm">Investigate</button>
+    </div>
+  </div>
+
+  <div class="feedback-card">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h5 class="fw-bold mb-1">Sara Ali</h5>
+        <p class="mb-0"><strong>Feedback on:</strong> Swap #SWP105</p>
+      </div>
+      <span class="badge badge-neutral p-2">Neutral</span>
+    </div>
+    <p class="mt-3">"Decent experience. I felt the sessions could’ve been more structured. But overall, okay."</p>
+    <div class="feedback-meta">
+      <p>Submitted on: 10 July 2025</p>
+    </div>
+    <div class="action-buttons mt-2">
+      <button class="btn btn-danger btn-sm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-5">
+  <div class="container">
+    <div class="footer-section">
+      <h5>About SkillSwap</h5>
+      <p>SkillSwap admins ensure quality by reviewing all user feedback and maintaining a respectful platform culture.</p>
+    </div>
+    <div class="footer-section">
+      <h5>Admin Links</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="swap.html">Swaps</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+    <div class="footer-section">
+      <h5>Resources</h5>
+      <a href="#">Moderation Guidelines</a>
+      <a href="#">Community Code</a>
+      <a href="#">Report Review Policy</a>
+    </div>
+    <div class="footer-section">
+      <h5>Contact</h5>
+      <p>Email: admin@skillswap.com</p>
+      <p>Phone: +1-234-567-8901</p>
+    </div>
+  </div>
+  <div class="text-center py-3">&copy; 2025 SkillSwap Admin. All rights reserved.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
