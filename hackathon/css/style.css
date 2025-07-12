@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #b0caf2, #5a7ed9);
+    color: #1f2937;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 70vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #3B82F6;
+    /* Primary Blue */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .btn-outline {
+  background-color:  #3B82F6;
+  color: white;
+  border-color: white;
+}
+
+.navbar .btn-outline:hover {
+  background-color: white;
+  color: #3B82F6;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.logo::before {
+    content: "\1F527";
+    font-size: 1.5rem;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #3B82F6;
+    outline: none;
+}
+
+.btn-primary,
+.btn-outline {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-left: 1rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #3B82F6;
+    color: white;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 2px solid #3B82F6;
+  color: #3B82F6;
+  background-color: transparent;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background-color: #3B82F6;
+  color: white;
+}
+
+
+/* Hero Section */
+.hero {
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #3B82F6;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 span {
+    color: #f59e0b;
+    /* Accent Yellow */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* How It Works Section */
+.how-it-works {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 1rem;
+    background-color: #f9fafb;
+    text-align: center;
+}
+
+.how-it-works .step {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 260px;
+}
+
+.how-it-works .step h3 {
+    font-size: 1.1rem;
+    color: #f59e0b;
+    margin-bottom: 0.5rem;
+}
+
+.how-it-works .step p {
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+/* Footer */
+.footer {
+    background-color: #3B82F6;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.95rem;
+    color: white;
+    margin-top: auto;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Login Page Styling */
+.hidden {
+  display: none;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  background-color: #f9fafb;
+  min-height: 80vh;
+}
+
+.login-card {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card h2 {
+  font-size: 2rem;
+  color: #3B82F6;
+  margin-bottom: 0.5rem;
+}
+
+.login-card h3 {
+  margin: 1.2rem 0 0.8rem;
+  color: #1f2937;
+}
+
+.role-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+.login-form input:focus {
+  border-color: #3B82F6;
+  outline: none;
+}
+
+.google-login {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #374151;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-google img {
+  height: 20px;
+  width: 20px;
+}
+
+.btn-google:hover {
+  background-color: #f3f4f6;
+}
+
+/* Profile Page Styling */
+
+.profile-wrapper {
+  min-height: 80vh;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.profile-heading {
+  text-align: center;
+  font-size: 2rem;
+  color: #3B82F6;
+  margin-bottom: 2rem;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.profile-form input,
+.profile-form select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+  border-color: #3B82F6;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.inline-radio {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inline-radio label {
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.google-login {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.google-login p {
+  color: #6b7280;
+  margin-bottom: 0.8rem;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #374151;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-google img {
+  height: 20px;
+  width: 20px;
+}
+
+.btn-google:hover {
+  background-color: #f3f4f6;
+}
+
+
+/* Browse Skills Page */
+.browse-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.browse-container h2 {
+  font-size: 2rem;
+  color: #3B82F6;
+  margin-bottom: 2rem;
+}
+
+.user-cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+.user-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.user-card h3 {
+  color: #1f2937;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-card p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.user-card .btn-primary {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
