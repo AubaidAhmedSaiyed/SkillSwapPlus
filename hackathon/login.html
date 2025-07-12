@@ -4,23 +4,168 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | SkillSwap</title>
-  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Bootstrap + Icons + AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #b0caf2, #5a7ed9);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: #091772;
+      padding: 1rem 2rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+
+    .login-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      animation: fadeInUp 0.8s ease-in-out;
+    }
+
+    .login-card h2 {
+      color: #091772;
+      text-align: center;
+    }
+
+    .role-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      background-color: #091772;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+      background-color: #000e4c;
+    }
+
+    .btn-outline:hover {
+      background-color: #fff;
+      color: #091772;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeInUp 0.5s ease-in-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .google-login {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .btn-google {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 8px 14px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .btn-google img {
+      height: 20px;
+    }
+
+    .footer {
+      text-align: center;
+      background-color: white;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      border-top: 1px solid #ddd;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="login-page">
+
+<body>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">SkillSwap</div>
     <div>
-      <a href="index.html" class="btn-outline">Home</a>
-      <a href="profile.html" class="btn-outline">Profile</a>
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
     </div>
   </nav>
 
   <!-- Main Login Section -->
   <main class="login-container">
-    <div class="login-card">
-      <h2>Login to SkillSwap</h2>
-      <p>Select your role to continue:</p>
+    <div class="login-card" data-aos="fade-up">
+      <h2><i class="bi bi-box-arrow-in-right"></i> Login to SkillSwap</h2>
+      <p class="text-center text-muted">Select your role to continue</p>
 
       <!-- Role Selector -->
       <div class="role-buttons" id="roleSelector">
@@ -29,14 +174,14 @@
       </div>
 
       <!-- USER LOGIN -->
-      <form id="userLoginForm" class="login-form hidden">
-        <h3>User Login</h3>
+      <form id="userLoginForm" class="login-form hidden" onsubmit="redirectUser(event)">
+        <h5 class="text-center text-primary">User Login</h5>
         <input type="email" placeholder="Email" required />
         <input type="password" placeholder="Password" required />
         <button type="submit" class="btn-primary">Login as User</button>
 
         <div class="google-login">
-          <p>or</p>
+          <p class="text-muted small">or</p>
           <button type="button" class="btn-google" onclick="handleGoogleLogin()">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
             Continue with Google
@@ -46,13 +191,13 @@
 
       <!-- ADMIN LOGIN -->
       <form id="adminLoginForm" class="login-form hidden" onsubmit="redirectAdmin(event)">
-        <h3>Admin Login</h3>
+        <h5 class="text-center text-danger">Admin Login</h5>
         <input type="email" placeholder="Admin Email" required />
         <input type="password" placeholder="Password" required />
         <button type="submit" class="btn-primary">Login as Admin</button>
 
         <div class="google-login">
-          <p>or</p>
+          <p class="text-muted small">or</p>
           <button type="button" class="btn-google" onclick="handleGoogleLogin()">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
             Continue with Google
@@ -62,32 +207,43 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 <strong>SkillSwap</strong>. Built with ❤️ by Team QwikQuery.</p>
+    <p>&copy; 2025 <strong>SkillSwap</strong>. Built with ❤ by Team QwikQuery.</p>
   </footer>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-  function showLogin(role) {
-    document.getElementById("roleSelector").classList.add("hidden");
-    document.getElementById("userLoginForm").classList.add("hidden");
-    document.getElementById("adminLoginForm").classList.add("hidden");
+    AOS.init();
 
-    if (role === "user") {
-      document.getElementById("userLoginForm").classList.remove("hidden");
-    } else {
-      document.getElementById("adminLoginForm").classList.remove("hidden");
+    function showLogin(role) {
+      document.getElementById("roleSelector").classList.add("hidden");
+      document.getElementById("userLoginForm").classList.add("hidden");
+      document.getElementById("adminLoginForm").classList.add("hidden");
+
+      if (role === "user") {
+        document.getElementById("userLoginForm").classList.remove("hidden");
+      } else {
+        document.getElementById("adminLoginForm").classList.remove("hidden");
+      }
     }
-  }
 
-  function handleGoogleLogin() {
-    alert("🔐 Google Sign-In will be implemented here.");
-  }
+    function handleGoogleLogin() {
+      alert("🔐 Google Sign-In will be implemented here.");
+    }
 
-  function redirectAdmin(event) {
-    event.preventDefault();
-    window.location.href = "dashboard.html"; // ✅ fixed
-  }
-</script>
+    function redirectUser(event) {
+      event.preventDefault();
+      // Normally, authentication happens here
+      window.location.href = "brows.html"; // Redirect after login
+    }
 
+    function redirectAdmin(event) {
+      event.preventDefault();
+      window.location.href = "dashboard.html"; // Redirect admin
+    }
+  </script>
 </body>
 </html>
